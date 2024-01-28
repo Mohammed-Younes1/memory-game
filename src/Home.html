@@ -1,14 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="output.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="output.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Memory Game</title>
-</head>
-<!-- npm run dev -->
-<body>
-    <h1 class="bg-red-950">test</h1>
-</body>
+    <script src="app.js" defer></script>
+  </head>
+  <!-- npm run dev -->
+  <body>
+    <div class="bg-green-200 font-mono">
+      <!-- header -->
+      <div class="flex justify-around header">
+        <div>
+          <h1 class="py-2 px-4 mx-2 my-4 text-2xl font-semibold">
+            Memory Game
+          </h1>
+        </div>
+        <div class="flex">
+          <button
+            class="bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+          >
+            Start
+          </button>
+          <button
+            class="bg-blue-400 hover:bg-blue-800 text-white hover:text-red-600 font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+          >
+            Restart
+          </button>
+        </div>
+      </div>
+      <!-- First Part info -->
+      <div class="">
+        <h3 class="py-2 px-10 mx-2 my-2 font-bold text-2lx">Objective:</h3>
+        <p class="py-2 px-16 mx-2 my-2">
+          The goal is simple yet tantalizing – uncover pairs of matching cards
+          scattered across the game board. The catch? The cards are initially
+          face-down, and it's up to you to remember their positions as you flip
+          them over two at a time.
+        </p>
+      </div>
+      <!-- Second Part scores-->
+      <div class="flex font-semibold justify-around border border-blue-300 bg-green-100 my-8  mx-10 px-4  shadow-lg">
+        <h3>Number of actions:</h3>
+        <h3>Successful points:</h3>
+        <h3>Failed times:</h3>
+        <div>timer:</div>
+      </div>
+      <!-- third Part main-->
+      <div class="px-10  mx-10 border border-black h-[700px]">
+        test
+      </div>
+    </div>
+  </body>
 </html>
