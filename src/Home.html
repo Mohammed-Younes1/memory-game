@@ -6,13 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="output.css" />
     <link rel="stylesheet" href="../styles.css" />
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
     <title>Memory Game</title>
-    <script src="app.js" defer></script>
+    <script src="app.js"></script>
   </head>
   <!-- npm run dev -->
   <body>
-    <div class="bg-green-200 font-mono">
+    <div class="bg-green-50 font-mono">
+      <div class="overlay" id="overlay">
+        <div class="popup">
+          <div>to start the game please choose!</div>
+          <form class="block">
+            <div class="my-5">
+              <label for="cards">How many cards</label>
+              <select id="cards" name="cards" class="form-select">
+                <option value="four-card">4</option>
+                <option value="six-card">6</option>
+                <option value="tenc-ard">10</option>
+
+                <option value="fourteen-card">14</option>
+                <option value="six">16</option>
+              </select>
+            </div>
+            <div class="my-5">
+              <label for="mixtakes">How many mixtakes can you do? </label>
+              <select id="cards" name="cards" class="form-select">
+                <option value="two-mistakes">1</option>
+                <option value="two-mistakes">2</option>
+                <option value="third-mistakes">3</option>
+                <option value="four-mistakes">4</option>
+                <option value="five-mistakes">5</option>
+              </select>
+            </div>
+            <div class="my-5">
+              <label for="timer">Choose the time!</label>
+              <select id="cards" name="cards" class="form-select">
+                <option value="haf-time">30sec</option>
+                <option value="haf-mark-time">40sec</option>
+                <option value="one-time">1min</option>
+                <option value="one-half-time">1.5 min</option>
+                <option value="two-time">2 mins</option>
+              </select>
+            </div>
+          </form>
+          <button onclick="closePopup()">Close</button>
+          <button onclick="closePopup()">Accept</button>
+        </div>
+      </div>
+
       <!-- header -->
       <div class="flex justify-around header">
         <div>
@@ -44,14 +88,18 @@
         </p>
       </div>
       <!-- Second Part scores-->
-      <div class="flex font-semibold justify-around border border-blue-300 bg-green-100 my-8  mx-10 px-4  shadow-lg">
+      <div
+        class="flex font-semibold justify-around border-4 border-blue-300 bg-green-100 my-8 mx-10 px-4 py-5 drop-shadow-2xl"
+      >
         <h3>Number of actions:</h3>
         <h3>Successful points:</h3>
         <h3>Failed times:</h3>
         <div>timer:</div>
       </div>
       <!-- third Part main-->
-      <div class="px-10  mx-10 border border-black h-[700px]">
+      <div
+        class="px-10 mx-10 border-4 h-[700px] border-blue-300 drop-shadow-2xl"
+      >
         test
       </div>
     </div>
