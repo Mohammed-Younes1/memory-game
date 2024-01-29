@@ -1,8 +1,17 @@
 const flagContainer = document.querySelector(".photos-place");
-let numAction=""
-let numSuccs="";
-let numFail="";
-let time="";
+const playButton = document.querySelector(".btn-1");
+const restartButton = document.querySelector(".btn-2");
+let numAction = document.querySelector(".num-1");
+let numSuccs = document.querySelector("num-2");
+let numFail = document.querySelector("num-3");
+let timer = document.querySelector("timer");
+let awaitingEndMove=false;
+
+
+let activeCard=null;
+numAction = 0;
+numSuccs = 0;
+numFail = 0;
 
 
 const flags = [
@@ -26,28 +35,44 @@ const flags = [
   { id: -9, name: "Oman", image: "./Flag/Oman.png" },
   { id: 10, name: "Yemen", image: "./Flag/Yemen.png" },
   { id: -10, name: "Yemen", image: "./Flag/Yemen.png" },
-
 ];
 
+flags.forEach((flag) => {
+  
+  const imgElement = document.createElement("img");
 
-  flags.forEach(flag => {
-    console.log(flag);
-    const imgElement = document.createElement("img");
+  imgElement.src = flag.image;
+  imgElement.alt = flag.name;
 
-    imgElement.src = flag.image;
-    imgElement.alt = flag.name;
-
-    // adding  image element container
-    flagContainer.appendChild(imgElement);
-  });
-
-
-
-// for closing the popup
-document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("overlay").style.display = "flex";
+  // adding  image element container
+  flagContainer.appendChild(imgElement);
 });
 
-function closePopup() {
-  document.getElementById("overlay").style.display = "none";
-}
+
+// document.getElementById("overlay").style.display = "flex";
+
+// for closing the popup
+
+// function closePopup() {
+//   document.getElementById("overlay").style.display = "none";
+// }
+
+
+const startScore = () => {
+  numAction = 0;
+  numSuccs = 0;
+  numFail = 0;
+  timer;
+};
+const startGame = () => {
+  console.log("Start the game");
+//   startScore()
+};
+
+const restartGame = () => {
+    startScore()
+  console.log("restart the game");
+  console.log(startScore);
+};
+playButton.addEventListener("click", startGame);
+restartButton.addEventListener("click", restartGame);

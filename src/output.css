@@ -548,38 +548,22 @@ video {
   width: 100%;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 420px) {
   .container {
-    max-width: 640px;
+    max-width: 420px;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 520px) {
   .container {
-    max-width: 768px;
+    max-width: 520px;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 950px) {
   .container {
-    max-width: 1024px;
+    max-width: 950px;
   }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
-}
-
-.m-4 {
-  margin: 1rem;
 }
 
 .mx-10 {
@@ -628,36 +612,16 @@ video {
   height: 700px;
 }
 
-.h-auto {
-  height: auto;
-}
-
 .w-32 {
   width: 8rem;
 }
 
-.grid-flow-col {
-  grid-auto-flow: column;
-}
-
-.grid-cols-8 {
-  grid-template-columns: repeat(8, minmax(0, 1fr));
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-7 {
   grid-template-columns: repeat(7, minmax(0, 1fr));
-}
-
-.grid-cols-6 {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
-.grid-cols-5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .justify-end {
@@ -748,6 +712,16 @@ video {
   line-height: 2rem;
 }
 
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -776,44 +750,32 @@ video {
   color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
-@media (min-width: 640px) {
-  .sm\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+@media (min-width: 420px) {
+  .xxsm\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 }
 
-@media (min-width: 768px) {
-  .md\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .lg\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
-  .lg\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1280px) {
-  .xl\:grid-cols-4 {
+@media (min-width: 520px) {
+  .xsm\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .xl\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+  .xsm\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 }
 
-@media (min-width: 1536px) {
-  .\32xl\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+@media (min-width: 950px) {
+  .lgish\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
-  .\32xl\:grid-cols-6 {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+  .lgish\:text-blue-300 {
+    --tw-text-opacity: 1;
+    color: rgb(147 197 253 / var(--tw-text-opacity));
   }
 }
