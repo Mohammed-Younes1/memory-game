@@ -6,14 +6,12 @@ let numSuccs = document.querySelector("num-2");
 let numFail = document.querySelector("num-3");
 let timer = document.querySelector("timer");
 let awaitingEndMove=false;
-
-
 let activeCard=null;
+
+
 numAction = 0;
 numSuccs = 0;
 numFail = 0;
-
-
 const flags = [
   { id: 1, name: "Jordan", image: "./Flag/Jordan.png" },
   { id: -1, name: "Jordan", image: "./Flag/Jordan.png" },
@@ -36,26 +34,38 @@ const flags = [
   { id: 10, name: "Yemen", image: "./Flag/Yemen.png" },
   { id: -10, name: "Yemen", image: "./Flag/Yemen.png" },
 ];
+const flagsNumb=flags.length;
 
+
+// for(let i = 0; i < flagsNumb; i++){
+//     const randomIndex = Math.floor(Math.random() * flags.length);
+//     const flagCard = flags[randomIndex];
+//     console.log(randomIndex);
+//     console.log("oskdoaskdo");
+//     // console.log(flagCard);
+//     flags.splice(randomIndex, 1);
+
+// }
 flags.forEach((flag) => {
   
-  const imgElement = document.createElement("img");
+    const imgElement = document.createElement("img");
+  
+    imgElement.src = flag.image;
+    imgElement.alt = flag.name;
+  
+    // adding  image element container
+    flagContainer.appendChild(imgElement);
+  });
 
-  imgElement.src = flag.image;
-  imgElement.alt = flag.name;
 
-  // adding  image element container
-  flagContainer.appendChild(imgElement);
-});
-
-
-// document.getElementById("overlay").style.display = "flex";
 
 // for closing the popup
 
-// function closePopup() {
-//   document.getElementById("overlay").style.display = "none";
-// }
+document.getElementById("overlay").style.display = "flex";
+
+function closePopup() {
+  document.getElementById("overlay").style.display = "none";
+}
 
 
 const startScore = () => {

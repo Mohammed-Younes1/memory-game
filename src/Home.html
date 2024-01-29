@@ -21,35 +21,39 @@
           <div>to start the game please choose!</div>
           <form class="block">
             <div class="my-5">
-              <label for="cards">How many cards</label>
-              <select id="cards" name="cards" class="form-select">
-                <option value="four-card">4</option>
-                <option value="six-card">6</option>
-                <option value="eight-card">8</option>
-
-                <option value="ten-card">10</option>
-                <!-- <option value="twelve-card">12</option> -->
-              </select>
-            </div>
-            <div class="my-5">
-              <label for="mixtakes">How many mixtakes can you do? </label>
-              <select id="cards" name="cards" class="form-select">
-                <option value="two-mistakes">1</option>
-                <option value="two-mistakes">2</option>
-                <option value="third-mistakes">3</option>
-                <option value="four-mistakes">4</option>
-                <option value="five-mistakes">5</option>
-              </select>
-            </div>
-            <div class="my-5">
-              <label for="timer">Choose the time!</label>
-              <select id="cards" name="cards" class="form-select">
-                <option value="haf-time">30sec</option>
-                <option value="haf-mark-time">40sec</option>
-                <option value="one-time">1min</option>
-                <option value="one-half-time">1.5 min</option>
-                <option value="two-time">2 mins</option>
-              </select>
+                <div class="my-5">
+                    <label for="cards">How many cards</label>
+                    <select id="cards-opt1" name="cards" class="form-select card-opt1">
+                      <option value="four-card">4</option>
+                      <option value="six-card">6</option>
+                      <option value="eight-card">8</option>
+                      <option value="ten-card">10</option>
+                      <!-- <option value="twelve-card">12</option> -->
+                    </select>
+                  </div>
+                  
+                  <div class="my-5">
+                    <label for="mistakes">How many mistakes can you do? </label>
+                    <select id="card-opt2" name="mistakes" class="form-select card-opt2">
+                      <option value="one-mistake">1</option>
+                      <option value="two-mistakes">2</option>
+                      <option value="three-mistakes">3</option>
+                      <option value="four-mistakes">4</option>
+                      <option value="five-mistakes">5</option>
+                    </select>
+                  </div>
+                  
+                  <div class="my-5">
+                    <label for="timer">Choose the time!</label>
+                    <select id="cards-opt3" name="timer" class="form-select card-opt3">
+                      <option value="half-time">30 sec</option>
+                      <option value="half-more-time">40 sec</option>
+                      <option value="one-time">1 min</option>
+                      <option value="two-time">2 mins</option>
+                      <option value="three-time">3 mins</option>
+                    </select>
+                  </div>
+                  
             </div>
           </form>
           <button
