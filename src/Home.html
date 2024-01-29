@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <title>Memory Game</title>
-    <script src="app.js"></script>
+    <script src="./app.js" defer></script>
   </head>
   <!-- npm run dev -->
   <body>
@@ -25,10 +25,10 @@
               <select id="cards" name="cards" class="form-select">
                 <option value="four-card">4</option>
                 <option value="six-card">6</option>
-                <option value="tenc-ard">10</option>
+                <option value="eight-card">8</option>
 
-                <option value="fourteen-card">14</option>
-                <option value="six">16</option>
+                <option value="ten-card">10</option>
+                <!-- <option value="twelve-card">12</option> -->
               </select>
             </div>
             <div class="my-5">
@@ -52,8 +52,18 @@
               </select>
             </div>
           </form>
-          <button onclick="closePopup()" class="bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32">Close</button>
-          <button onclick="closePopup()" class="bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32">Accept</button>
+          <button
+            onclick="closePopup()"
+            class="bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+          >
+            Close
+          </button>
+          <button
+            onclick="closePopup()"
+            class="bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+          >
+            Accept
+          </button>
         </div>
       </div>
 
@@ -100,7 +110,10 @@
       <div
         class="px-10 mx-10 border-4 h-[700px] border-blue-300 drop-shadow-2xl"
       >
-        test
+        <!-- <div class="grid grid-cols-7 gap-4" id="photos-place"> -->
+            <div class="photos-place grid grid-cols-2 2xl:grid-cols-6 gap-4 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3" id="photos-place"></div>
+            </div>
+        </div>
       </div>
     </div>
   </body>
