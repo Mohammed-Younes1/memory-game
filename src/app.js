@@ -1,13 +1,17 @@
 const flagContainer = document.querySelector(".photos-place");
 const playButton = document.querySelector(".btn-1");
 const restartButton = document.querySelector(".btn-2");
+const closeButton = document.querySelector(".closebutton");
+const acceptButton = document.querySelector(".acceptbutton");
+let cardNumSelected=document.querySelector(".cards-opt1");
+let mistakesSelected=document.querySelector(".cards-opt2");
+let timerSelected=document.querySelector(".cards-opt3")
 let numAction = document.querySelector(".num-1");
 let numSuccs = document.querySelector("num-2");
 let numFail = document.querySelector("num-3");
 let timer = document.querySelector("timer");
-let awaitingEndMove=false;
-let activeCard=null;
-
+let awaitingEndMove = false;
+let activeCard = null;
 
 numAction = 0;
 numSuccs = 0;
@@ -34,39 +38,23 @@ const flags = [
   { id: 10, name: "Yemen", image: "./Flag/Yemen.png" },
   { id: -10, name: "Yemen", image: "./Flag/Yemen.png" },
 ];
-const flagsNumb=flags.length;
+const flagsNumb = flags.length;
 
+console.log(flags.length);
+for (let i = 0; i < flagsNumb; i++) {
+  const randomIndex = Math.floor(Math.random() * flags.length);
+  const flagCard = flags[randomIndex];
+  // console.log(randomIndex);
+  console.log(flagCard);
+  flags.splice(randomIndex, 1);
+  const imgElement = document.createElement("img");
 
-// for(let i = 0; i < flagsNumb; i++){
-//     const randomIndex = Math.floor(Math.random() * flags.length);
-//     const flagCard = flags[randomIndex];
-//     console.log(randomIndex);
-//     console.log("oskdoaskdo");
-//     // console.log(flagCard);
-//     flags.splice(randomIndex, 1);
+  imgElement.src = flagCard.image;
+  imgElement.alt = flagCard.name;
 
-// }
-flags.forEach((flag) => {
-  
-    const imgElement = document.createElement("img");
-  
-    imgElement.src = flag.image;
-    imgElement.alt = flag.name;
-  
-    // adding  image element container
-    flagContainer.appendChild(imgElement);
-  });
-
-
-
-// for closing the popup
-
-document.getElementById("overlay").style.display = "flex";
-
-function closePopup() {
-  document.getElementById("overlay").style.display = "none";
+  // adding  image element container
+  flagContainer.appendChild(imgElement);
 }
-
 
 const startScore = () => {
   numAction = 0;
@@ -74,15 +62,21 @@ const startScore = () => {
   numFail = 0;
   timer;
 };
+const closePopup = () => {
+  document.getElementById("overlay").style.display = "none";
+};
+
 const startGame = () => {
   console.log("Start the game");
-//   startScore()
+  document.getElementById("overlay").style.display = "flex";
 };
 
 const restartGame = () => {
-    startScore()
+  startScore();
   console.log("restart the game");
   console.log(startScore);
 };
 playButton.addEventListener("click", startGame);
 restartButton.addEventListener("click", restartGame);
+closeButton.addEventListener("click", closePopup);
+acceptButton.addEventListener("click", closePopup);
