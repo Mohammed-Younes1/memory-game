@@ -12,7 +12,6 @@ let numFail = document.querySelector(".num-3");
 let timer = document.querySelector(".timer");
 let awaitingEndMove = false;
 let activeCard = null;
-let selectedCards=[];
 
 numAction = 0;
 numSuccs = 0;
@@ -64,7 +63,6 @@ const flags = [
   { id: 10, name: "Yemen", image: "./Flag/Yemen.png", isVisible: "visible" },
   { id: -10, name: "Yemen", image: "./Flag/Yemen.png", isVisible: "visible" },
 ];
-
 const flagsNumb = flags.length;
 
 console.log(flags.length);
@@ -75,31 +73,12 @@ for (let i = 0; i < flagsNumb; i++) {
   flags.splice(randomIndex, 1);
   const imgElement = document.createElement("img");
 
-  imgElement.src = "./Flag/black.png";
-  imgElement.alt = "black";
-  imgElement.classList.add("flag");
-
-  imgElement.addEventListener("click", () => {
-    revealFlag(imgElement, flagCard);
-  });
+  imgElement.src = flagCard.image;
+  imgElement.alt = flagCard.name;
 
   // adding  image element container
   flagContainer.appendChild(imgElement);
 }
-
-const revealFlag = (imgElement, flagCard) => {
-  if (flagCard === "hidden" || awaitingEndMove) {
-    return;
-  }
-  imgElement.src = flagCard.image;
-  imgElement.alt = flagCard.alt;
-  flagCard.isVisible = "hidden";
-  if(selectedCards)
-  awaitingEndMove = true;
-  setTimeout(() => {
-    awaitingEndMove = false;
-  }, 1000);
-};
 
 const startScore = () => {
   numAction = 0;
@@ -121,8 +100,10 @@ const restartGame = () => {
   console.log("restart the game");
   console.log(startScore);
 };
-
 playButton.addEventListener("click", startGame);
 restartButton.addEventListener("click", restartGame);
 closeButton.addEventListener("click", closePopup);
 acceptButton.addEventListener("click", closePopup);
+
+
+

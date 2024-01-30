@@ -24,16 +24,16 @@
                 <div class="my-5">
                     <label for="cards">How many cards</label>
                     <select id="cards-opt1" name="cards" class="form-select card-opt1">
-                      <option value="4">4</option>
-                      <option value="6">6</option>
-                      <option value="8">8</option>
-                      <option value="10">10</option>
+                      <option value="4">4x4</option>
+                      <option value="6">6x6</option>
+                      <option value="8">8x8</option>
+                      <option value="10">10x10</option>
                       <!-- <option value="twelve-card">12</option> -->
                     </select>
                   </div>
                   
                   <div class="my-5">
-                    <label for="mistakes">How many mistakes can you do? </label>
+                    <label for="mistakes">How many failed attempts? </label>
                     <select id="card-opt2" name="mistakes" class="form-select card-opt2">
                       <option value="one-mistake">1</option>
                       <option value="two-mistakes">2</option>
@@ -102,14 +102,17 @@
         </p>
       </div>
       <!-- Second Part scores-->
-      <div
-        class="flex font-semibold justify-around border-4 border-blue-300 bg-green-100 my-8 mx-10 px-4 py-5 drop-shadow-2xl"
-      >
-        <h3 class="num-1 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs">Number of actions:</h3>
-        <h3 class="num-2 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs" >Successful points:</h3>
-        <h3 class="num-3 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs">Failed times:</h3>
-        <div class="timer 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs">Timer:</div>
+      <div class="flex justify-between font-semibold border-4 border-blue-300 bg-green-100 my-8 mx-10 px-4 py-5 drop-shadow-2xl">
+        <div>
+          <!-- <h3 class="num-1 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs">Number of actions:</h3> -->
+          <h3 class="num-2 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs">Successful points:</h3>
+          <h3 class="num-3 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs">Failed times:</h3>
+        </div>
+        <div>
+            <div class="timer 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs">Timer</div>
+        </div>
       </div>
+      
       <!-- third Part main-->
       <div
         class="px-10 mx-10 border-4 h-[700px] border-blue-300 drop-shadow-2xl"
