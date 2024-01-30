@@ -12,12 +12,14 @@ let numFail = document.querySelector(".num-3");
 let timer = document.querySelector(".timer");
 let awaitingEndMove = false;
 let activeCard = null;
-let selectedCards=[];
+let firstCard = 0;
+let secondCard = 0;
+let selectedCards = [];
 
 numAction = 0;
 numSuccs = 0;
 numFail = 0;
-const flags = [
+const cards = [
   { id: 1, name: "Jordan", image: "./Flag/Jordan.png", isVisible: "visible" },
   { id: -1, name: "Jordan", image: "./Flag/Jordan.png", isVisible: "visible" },
   {
@@ -65,14 +67,14 @@ const flags = [
   { id: -10, name: "Yemen", image: "./Flag/Yemen.png", isVisible: "visible" },
 ];
 
-const flagsNumb = flags.length;
+const flagsNumb = cards.length;
 
-console.log(flags.length);
+console.log(cards.length);
 for (let i = 0; i < flagsNumb; i++) {
-  const randomIndex = Math.floor(Math.random() * flags.length);
-  const flagCard = flags[randomIndex];
-  console.log(flagCard);
-  flags.splice(randomIndex, 1);
+  const cardShuffle = Math.floor(Math.random() * cards.length);
+  const flagCard = cards[cardShuffle];
+//  
+  cards.splice(cardShuffle, 1);
   const imgElement = document.createElement("img");
 
   imgElement.src = "./Flag/black.png";
@@ -82,11 +84,22 @@ for (let i = 0; i < flagsNumb; i++) {
   imgElement.addEventListener("click", () => {
     revealFlag(imgElement, flagCard);
   });
-
-  // adding  image element container
+//   imgElement.addEventListener("click", () => {
+//     passCard(imgElement.id);
+//   });
   flagContainer.appendChild(imgElement);
 }
-
+const passCard = (cardId) => {
+  if (selectedCards.length == 0) {
+    // firstCard=cardId.push(selectedCards);
+    firstCard = cardId;
+    selectedCards.push(firstCard);
+  } else if (firstCard != cardId) {
+    secondCard = cardId;
+    selectedCards.push(secondCard);
+    handleSelectedCards();
+  }
+};
 const revealFlag = (imgElement, flagCard) => {
   if (flagCard === "hidden" || awaitingEndMove) {
     return;
@@ -94,11 +107,35 @@ const revealFlag = (imgElement, flagCard) => {
   imgElement.src = flagCard.image;
   imgElement.alt = flagCard.alt;
   flagCard.isVisible = "hidden";
-  if(selectedCards)
-  awaitingEndMove = true;
-  setTimeout(() => {
-    awaitingEndMove = false;
-  }, 1000);
+
+  if (selectedCards.length == 0) {
+  }
+  selectedCards.push({ imgElement, flagCard });
+  if (selectedCards.length === 2) {
+    handleSelectedCards();
+  }
+};
+
+const handleSelectedCards = () => {
+  const [card1, card2] = selectedCards;
+
+  if (Math.abs(card1.flagCard.id) === Math.abs(card2.flagCard.id)) {
+    numSuccs++;
+    console.log("match");
+  } else {
+    setTimeout(() => {
+      flipCardBack(card1.imgElement, card1.flagCard);
+      flipCardBack(card2.imgElement, card2.flagCard);
+    }, 1000);
+    numFail++;
+  }
+  selectedCards = [];
+  console.log(`failed times ${numFail} and points are ${numSuccs}`);
+};
+const flipCardBack = (imgElement, flagCard) => {
+  imgElement.src = "./Flag/black.png";
+  imgElement.alt = "Black";
+  flagCard.isVisible = "visible";
 };
 
 const startScore = () => {
