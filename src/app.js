@@ -6,7 +6,7 @@ const acceptButton = document.querySelector(".acceptbutton");
 let cardNumSelected = document.querySelector(".cards-opt1");
 let mistakesSelected = document.querySelector(".cards-opt2");
 let timerSelected = document.querySelector(".cards-opt3");
-let numAction = document.querySelector(".num-1");
+// let numAction = document.querySelector(".num-1");
 let numSuccs = document.querySelector(".num-2");
 let numFail = document.querySelector(".num-3");
 let timer = document.querySelector(".timer");
@@ -16,9 +16,13 @@ let firstCard = 0;
 let secondCard = 0;
 let selectedCards = [];
 
+// let selectedCardValue = cardNumSelected.value;
+
 numAction = 0;
 numSuccs = 0;
 numFail = 0;
+
+
 const cards = [
   { id: 1, name: "Jordan", image: "./Flag/Jordan.png", isVisible: "visible" },
   { id: -1, name: "Jordan", image: "./Flag/Jordan.png", isVisible: "visible" },
@@ -73,7 +77,7 @@ console.log(cards.length);
 for (let i = 0; i < flagsNumb; i++) {
   const cardShuffle = Math.floor(Math.random() * cards.length);
   const flagCard = cards[cardShuffle];
-//  
+  //
   cards.splice(cardShuffle, 1);
   const imgElement = document.createElement("img");
 
@@ -84,22 +88,24 @@ for (let i = 0; i < flagsNumb; i++) {
   imgElement.addEventListener("click", () => {
     revealFlag(imgElement, flagCard);
   });
-//   imgElement.addEventListener("click", () => {
-//     passCard(imgElement.id);
-//   });
+
   flagContainer.appendChild(imgElement);
 }
-const passCard = (cardId) => {
-  if (selectedCards.length == 0) {
-    // firstCard=cardId.push(selectedCards);
-    firstCard = cardId;
-    selectedCards.push(firstCard);
-  } else if (firstCard != cardId) {
-    secondCard = cardId;
-    selectedCards.push(secondCard);
-    handleSelectedCards();
-  }
+// const passCard = (cardId) => {
+//   if (selectedCards.length == 0) {
+//     firstCard = cardId;
+//     selectedCards.push(firstCard);
+//   } else if (firstCard != cardId) {
+//     secondCard = cardId;
+//     selectedCards.push(secondCard);
+//     handleSelectedCards();
+//   }
+// };
+
+const setGameSettings = (cardNumSelected, mistakesSelected, timerSelected) => {
+  // numCardsSelected=;
 };
+
 const revealFlag = (imgElement, flagCard) => {
   if (flagCard === "hidden" || awaitingEndMove) {
     return;
@@ -108,8 +114,17 @@ const revealFlag = (imgElement, flagCard) => {
   imgElement.alt = flagCard.alt;
   flagCard.isVisible = "hidden";
 
-  if (selectedCards.length == 0) {
+  console.log(flagCard.id);
+  console.log(selectedCards[0]);
+
+  console.log(selectedCards[0]?.flagCard.id && selectedCards[0]?.flagCard.id === flagCard.id );
+  if (
+    selectedCards[0]?.flagCard.id &&
+    selectedCards[0]?.flagCard.id === flagCard.id
+  ) {
+    return;
   }
+
   selectedCards.push({ imgElement, flagCard });
   if (selectedCards.length === 2) {
     handleSelectedCards();
@@ -131,6 +146,9 @@ const handleSelectedCards = () => {
   }
   selectedCards = [];
   console.log(`failed times ${numFail} and points are ${numSuccs}`);
+  if(numSuccs==4){
+    alert('YOU HAVE WON!!!!!!!!!!!!!!!!!');
+  }
 };
 const flipCardBack = (imgElement, flagCard) => {
   imgElement.src = "./Flag/black.png";

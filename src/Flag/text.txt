@@ -107,3 +107,14 @@ acceptButton.addEventListener("click", closePopup);
 
 
 
+
+
+
+
+
+
+
+console.log(selectedCards[0]?.flagCard.id && selectedCards[0]?.flagCard.id === flagCard.id );
+  if (selectedCards[0]?.flagCard.id && selectedCards[0]?.flagCard.id === flagCard.id ) {
+    return;
+  }
