@@ -1,11 +1,11 @@
-const flagContainer = document.querySelector(".photos-place");
+const cardContainer = document.querySelector(".photos-place");
 const playButton = document.querySelector(".btn-1");
 const restartButton = document.querySelector(".btn-2");
 const closeButton = document.querySelector(".closebutton");
 const acceptButton = document.querySelector(".acceptbutton");
-let cardNumSelected = document.querySelector(".cards-opt1");
-let mistakesSelected = document.querySelector(".cards-opt2");
-let timerSelected = document.querySelector(".cards-opt3");
+// let cardNumSelected = document.querySelector(".card-opt1");
+let mistakesSelected = document.querySelector(".card-opt2");
+let timerSelected = document.querySelector(".card-opt3");
 // let numAction = document.querySelector(".num-1");
 let numSuccs = document.querySelector(".num-2");
 let numFail = document.querySelector(".num-3");
@@ -15,14 +15,17 @@ let activeCard = null;
 let firstCard = 0;
 let secondCard = 0;
 let selectedCards = [];
-
-// let selectedCardValue = cardNumSelected.value;
-
-numAction = 0;
+let timerCount = 0;
+let timerSet;
+let maxMistakes = 5;
 numSuccs = 0;
 numFail = 0;
 
+// let selectedCardValue = cardNumSelected.value;
+// let selectedMistakeValue = mistakesSelected.value;
+// let selectedTimerValue = timerSelected.value;
 
+// console.log("test",selectedCardValue,selectedMistakeValue,selectedTimerValue);
 const cards = [
   { id: 1, name: "Jordan", image: "./Flag/Jordan.png", isVisible: "visible" },
   { id: -1, name: "Jordan", image: "./Flag/Jordan.png", isVisible: "visible" },
@@ -71,42 +74,68 @@ const cards = [
   { id: -10, name: "Yemen", image: "./Flag/Yemen.png", isVisible: "visible" },
 ];
 
-const flagsNumb = cards.length;
+//creating the card list
+const createCards = (numCards) => {
+  const cardElements = [];
+  newCardsnumb = numCards * 2;
 
-console.log(cards.length);
-for (let i = 0; i < flagsNumb; i++) {
-  const cardShuffle = Math.floor(Math.random() * cards.length);
-  const flagCard = cards[cardShuffle];
-  //
-  cards.splice(cardShuffle, 1);
-  const imgElement = document.createElement("img");
+  const selectedCardData = cards.slice(0, newCardsnumb);
 
-  imgElement.src = "./Flag/black.png";
-  imgElement.alt = "black";
-  imgElement.classList.add("flag");
+  for (let j = 0; j < newCardsnumb; j++) {
+    const cardShuffle = Math.floor(Math.random() * selectedCardData.length);
+    const flagCard = selectedCardData[cardShuffle];
+    selectedCardData.splice(cardShuffle, 1);
+    const imgElement = document.createElement("img");
 
-  imgElement.addEventListener("click", () => {
-    revealFlag(imgElement, flagCard);
-  });
+    imgElement.src = "./Flag/black.png";
+    imgElement.alt = "black";
+    imgElement.classList.add("flag");
 
-  flagContainer.appendChild(imgElement);
-}
-// const passCard = (cardId) => {
-//   if (selectedCards.length == 0) {
-//     firstCard = cardId;
-//     selectedCards.push(firstCard);
-//   } else if (firstCard != cardId) {
-//     secondCard = cardId;
-//     selectedCards.push(secondCard);
-//     handleSelectedCards();
-//   }
-// };
+    imgElement.addEventListener("click", () => {
+      revealCard(imgElement, flagCard);
+    });
 
-const setGameSettings = (cardNumSelected, mistakesSelected, timerSelected) => {
-  // numCardsSelected=;
+    cardContainer.appendChild(imgElement);
+    cardElements.push({ imgElement, flagCard });
+  }
+
+  flipCardsWhenStart(cardElements);
+  console.log(cardElements, "herer");
 };
 
-const revealFlag = (imgElement, flagCard) => {
+// choosing how many cards
+playButton.addEventListener("click", () => {
+  document.getElementById("overlay").style.display = "flex";
+
+  acceptButton.addEventListener("click", () => {
+    const numCardsInput = document.querySelector(".card-opt1");
+    selectedNumOfCards = parseInt(numCardsInput.value);
+
+    console.log(selectedNumOfCards, "gygyug");
+
+    createCards(selectedNumOfCards);
+    document.getElementById("overlay").style.display = "none";
+    acceptButton.style.display = "none";
+  });
+});
+//fliping all the cards for 1 second when the game starts
+const flipCardsWhenStart = (cardElements) => {
+  setTimeout(() => {
+    cardElements.forEach(({ imgElement, flagCard }) => {
+      revealCard(imgElement, flagCard);
+      numSuccs = 0;
+      numFail = 0;
+    });
+  }, 1100);
+};
+
+const setGameSettings = (
+  cardNumSelected,
+  mistakesSelected,
+  timerSelected
+) => {};
+//Show the card after being clicked
+const revealCard = (imgElement, flagCard) => {
   if (flagCard === "hidden" || awaitingEndMove) {
     return;
   }
@@ -114,10 +143,7 @@ const revealFlag = (imgElement, flagCard) => {
   imgElement.alt = flagCard.alt;
   flagCard.isVisible = "hidden";
 
-  console.log(flagCard.id);
-  console.log(selectedCards[0]);
-
-  console.log(selectedCards[0]?.flagCard.id && selectedCards[0]?.flagCard.id === flagCard.id );
+  //   console.log(selectedCards[0]?.flagCard.id && selectedCards[0]?.flagCard.id === flagCard.id );
   if (
     selectedCards[0]?.flagCard.id &&
     selectedCards[0]?.flagCard.id === flagCard.id
@@ -130,13 +156,17 @@ const revealFlag = (imgElement, flagCard) => {
     handleSelectedCards();
   }
 };
-
+// comparing cards to show they are a match
 const handleSelectedCards = () => {
   const [card1, card2] = selectedCards;
 
   if (Math.abs(card1.flagCard.id) === Math.abs(card2.flagCard.id)) {
     numSuccs++;
     console.log("match");
+    setTimeout(() => {
+      cardContainer.removeChild(card1.imgElement);
+      cardContainer.removeChild(card2.imgElement);
+    }, 1200);
   } else {
     setTimeout(() => {
       flipCardBack(card1.imgElement, card1.flagCard);
@@ -146,10 +176,14 @@ const handleSelectedCards = () => {
   }
   selectedCards = [];
   console.log(`failed times ${numFail} and points are ${numSuccs}`);
-  if(numSuccs==4){
-    alert('YOU HAVE WON!!!!!!!!!!!!!!!!!');
+  if (numSuccs == selectedNumOfCards) {
+    setTimeout(() => {
+      alert("YOU HAVE WON!!!!!!!!!!!!!!!!!");
+    },1500);
   }
 };
+
+// flip cards to black side
 const flipCardBack = (imgElement, flagCard) => {
   imgElement.src = "./Flag/black.png";
   imgElement.alt = "Black";
@@ -177,7 +211,5 @@ const restartGame = () => {
   console.log(startScore);
 };
 
-playButton.addEventListener("click", startGame);
 restartButton.addEventListener("click", restartGame);
 closeButton.addEventListener("click", closePopup);
-acceptButton.addEventListener("click", closePopup);

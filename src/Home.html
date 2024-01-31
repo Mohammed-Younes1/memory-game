@@ -23,7 +23,7 @@
             <div class="my-5">
                 <div class="my-5">
                     <label for="cards">How many cards</label>
-                    <select id="cards-opt1" name="cards" class="form-select card-opt1">
+                    <select id="card-opt1" name="cards" class="form-select card-opt1">
                       <option value="4">4x4</option>
                       <option value="6">6x6</option>
                       <option value="8">8x8</option>
@@ -35,35 +35,35 @@
                   <div class="my-5">
                     <label for="mistakes">How many failed attempts? </label>
                     <select id="card-opt2" name="mistakes" class="form-select card-opt2">
-                      <option value="one-mistake">1</option>
-                      <option value="two-mistakes">2</option>
-                      <option value="three-mistakes">3</option>
-                      <option value="four-mistakes">4</option>
-                      <option value="five-mistakes">5</option>
+                      <option value="1">1 mistake</option>
+                      <option value="2">2 mistakes</option>
+                      <option value="3">3 mistakes</option>
+                      <option value="4">4 mistakes</option>
+                      <option value="5">5 mistakes</option>
                     </select>
                   </div>
                   
                   <div class="my-5">
                     <label for="timer">Choose the time!</label>
-                    <select id="cards-opt3" name="timer" class="form-select card-opt3">
-                      <option value="half-time">30 sec</option>
-                      <option value="half-more-time">40 sec</option>
-                      <option value="one-time">1 min</option>
-                      <option value="two-time">2 mins</option>
-                      <option value="three-time">3 mins</option>
+                    <select id="card-opt3" name="timer" class="form-select card-opt3">
+                      <option value="30">30 sec</option>
+                      <option value="40">40 sec</option>
+                      <option value="60">1 min</option>
+                      <option value="120">2 mins</option>
+                      <option value="180">3 mins</option>
                     </select>
                   </div>
                   
             </div>
           </form>
           <button
-            onclick="closePopup()"
+            
             class="closebutton bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
           >
             Close
           </button>
           <button
-            onclick="closePopup()"
+            
             class="acceptbutton bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
           >
             Accept
