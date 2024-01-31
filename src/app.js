@@ -77,19 +77,19 @@ const cards = [
 //creating the card list
 const createCards = (numCards) => {
   const cardElements = [];
-  newCardsnumb = numCards * 2;
+  let newCardsnumb = numCards * 2;
 
   const selectedCardData = cards.slice(0, newCardsnumb);
-
   for (let j = 0; j < newCardsnumb; j++) {
-    const cardShuffle = Math.floor(Math.random() * selectedCardData.length);
-    const flagCard = selectedCardData[cardShuffle];
-    selectedCardData.splice(cardShuffle, 1);
-    const imgElement = document.createElement("img");
+    const cardShuffleIndex = Math.floor(
+      Math.random() * selectedCardData.length
+    );
+    const flagCard = selectedCardData[cardShuffleIndex];
 
-    imgElement.src = "./Flag/black.png";
-    imgElement.alt = "black";
-    imgElement.classList.add("flag");
+    const imgElement = document.createElement("img");
+    imgElement.src = flagCard.image;
+    imgElement.alt = flagCard.alt;
+    // imgElement.classList.add("flag ");
 
     imgElement.addEventListener("click", () => {
       revealCard(imgElement, flagCard);
@@ -97,21 +97,22 @@ const createCards = (numCards) => {
 
     cardContainer.appendChild(imgElement);
     cardElements.push({ imgElement, flagCard });
+    selectedCardData.splice(cardShuffleIndex, 1);
   }
 
   flipCardsWhenStart(cardElements);
-  console.log(cardElements, "herer");
 };
 
+//hoisting
+
 // choosing how many cards
+let selectedNumOfCards = 0;
 playButton.addEventListener("click", () => {
   document.getElementById("overlay").style.display = "flex";
 
   acceptButton.addEventListener("click", () => {
     const numCardsInput = document.querySelector(".card-opt1");
     selectedNumOfCards = parseInt(numCardsInput.value);
-
-    console.log(selectedNumOfCards, "gygyug");
 
     createCards(selectedNumOfCards);
     document.getElementById("overlay").style.display = "none";
@@ -122,7 +123,8 @@ playButton.addEventListener("click", () => {
 const flipCardsWhenStart = (cardElements) => {
   setTimeout(() => {
     cardElements.forEach(({ imgElement, flagCard }) => {
-      revealCard(imgElement, flagCard);
+      flipCardBack(imgElement, flagCard);
+      //   revealCard(imgElement, flagCard);
       numSuccs = 0;
       numFail = 0;
     });
@@ -139,6 +141,7 @@ const revealCard = (imgElement, flagCard) => {
   if (flagCard === "hidden" || awaitingEndMove) {
     return;
   }
+
   imgElement.src = flagCard.image;
   imgElement.alt = flagCard.alt;
   flagCard.isVisible = "hidden";
@@ -166,6 +169,7 @@ const handleSelectedCards = () => {
     setTimeout(() => {
       cardContainer.removeChild(card1.imgElement);
       cardContainer.removeChild(card2.imgElement);
+      console.log(card1.imgElement, card2.imgElement);
     }, 1200);
   } else {
     setTimeout(() => {
@@ -174,12 +178,13 @@ const handleSelectedCards = () => {
     }, 1000);
     numFail++;
   }
+
   selectedCards = [];
   console.log(`failed times ${numFail} and points are ${numSuccs}`);
   if (numSuccs == selectedNumOfCards) {
     setTimeout(() => {
       alert("YOU HAVE WON!!!!!!!!!!!!!!!!!");
-    },1500);
+    }, 1500);
   }
 };
 
@@ -206,9 +211,7 @@ const startGame = () => {
 };
 
 const restartGame = () => {
-  startScore();
-  console.log("restart the game");
-  console.log(startScore);
+  window.location.reload();
 };
 
 restartButton.addEventListener("click", restartGame);

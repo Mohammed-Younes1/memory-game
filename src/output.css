@@ -544,6 +544,28 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.container {
+  width: 100%;
+}
+
+@media (min-width: 420px) {
+  .container {
+    max-width: 420px;
+  }
+}
+
+@media (min-width: 520px) {
+  .container {
+    max-width: 520px;
+  }
+}
+
+@media (min-width: 950px) {
+  .container {
+    max-width: 950px;
+  }
+}
+
 .visible {
   visibility: visible;
 }
