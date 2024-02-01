@@ -324,3 +324,35 @@ playButton.addEventListener("click", startGame);
 restartButton.addEventListener("click", restartGame);
 closeButton.addEventListener("click", closePopup);
 acceptButton.addEventListener("click", closePopup);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// choosing how many cards
+
+//   playButton.addEventListener("click", () => {
+//     document.getElementById("overlay").style.display = "flex";
+
+//     acceptButton.addEventListener("click", () => {
+//       const numCardsInput = document.querySelector(".card-opt1");
+//       selectedNumOfCards = parseInt(numCardsInput.value);
+
+//       createCards(selectedNumOfCards);
+//       document.getElementById("overlay").style.display = "none";
+
+//       // removes the button so we dont add more into the div
+//       // acceptButton.style.display = "none";
+//     });
+//   });
+
