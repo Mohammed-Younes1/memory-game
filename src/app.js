@@ -199,7 +199,7 @@ const handleSelectedCards = () => {
   if (Math.abs(card1.flagCard.id) === Math.abs(card2.flagCard.id)) {
     numSuccs++;
 
-    pointsDiv.innerHTML = `Score earned:<span style="color: #2c4c3b;"> ${
+    pointsDiv.innerHTML = `Score :<span style="color: #2c4c3b;"> ${
       scoreRate * numSuccs
     }%</span>`;
     console.log("match", numSuccs);
@@ -250,11 +250,11 @@ const flipCardBack = (imgElement, flagCard) => {
   imgElement.alt = "Black";
   flagCard.isVisible = "hidden";
 };
-
+// closing the Popup
 const closePopup = () => {
   document.getElementById("overlay").style.display = "none";
 };
-
+//restarting game
 const restartGame = () => {
   cardContainer.innerHTML = "";
   mistakesthing.innerHTML = "";

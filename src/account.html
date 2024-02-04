@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="output.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Account</title>
+    <!-- <script src="./app.js" defer></script> -->
+    <script src="./account.js" defer></script>
+  </head>
+  <body class="bg-green-50 font-mono">
+    <div class="overlay" id="overlay">
+      <div class="popup">
+        <div>Enter your Name and Password to Sign In and play</div>
+        <form class="block">
+          <div class="my-5"></div>
+        </form>
+        <button
+          class="cancelbutton bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+        >
+          Cancel
+        </button>
+        <button
+          class="signInButtonToPlay bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+        >
+          Sign in
+        </button>
+      </div>
+    </div>
+
+    <div class="overlay-up" id="overlay-up">
+      <div class="popup">
+        <div>Enter your Name and Password to Sign Up</div>
+        <form class="block">
+          <div class="my-5"></div>
+        </form>
+        <button
+          class="cancelbuttons bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+        >
+          Cancel
+        </button>
+        <button
+          class="signUpButtonToPlay bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+        >
+          Sign up
+        </button>
+      </div>
+    </div>
+
+    <div class="flex justify-around header">
+      <div>
+        <h1 class="py-2 px-4 mx-2 my-4 text-2xl font-semibold">Memory Game</h1>
+      </div>
+      <div class="flex">
+        <button
+          class="sign-in inline bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+        >
+          Sign In
+        </button>
+        <button
+          class="sign-up bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+        >
+          Sign Up
+        </button>
+        <button
+          class="sign-out bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+        >
+          Sign Out
+        </button>
+      </div>
+    </div>
+    <div class="">
+      <h3 class="py-2 px-10 mx-2 my-2 font-bold text-2lx">Objective:</h3>
+      <p class="py-2 px-16 mx-2 my-2">
+        The goal is simple yet tantalizing – uncover pairs of matching cards
+        scattered across the game board. The catch? The cards are initially
+        face-down, and it's up to you to remember their positions as you flip
+        them over two at a time.
+      </p>
+      <h3 class="py-2 px-10 mx-2 my-2 font-bold text-2lx">
+        In order to play you need to Sign in
+      </h3>
+    </div>
+  </body>
+</html>
