@@ -8,13 +8,8 @@ const NumMistakesInput = document.querySelector(".card-opt2");
 const timerInput = document.querySelector(".card-opt3");
 const mistakesthing = document.querySelector(".scores");
 const timerthing = document.querySelector(".timer-sele");
-// let numAction = document.querySelector(".num-1");
-
-// let selectedNumOfMistakes = parseInt(NumMistakesInput.value);
-
 let numSuccs = document.querySelector(".num-2");
 let numFail = document.querySelector(".num-3");
-// let timer = document.querySelector(".timer");
 let awaitingEndMove = false;
 let activeCard = null;
 let firstCard = 0;
@@ -105,10 +100,9 @@ const pointsElement = document.createElement("h3");
 const timerElement = document.createElement("div");
 
 const setGameSettings = (numFail, numSuccs) => {
-  gameTimer(selectedTimer);
- 
+  gameTimer();
   mistakesElement.innerHTML = `Mistakes: <span style="color: red;">${numFail}</span> out of ${selectedNumOfMistakes}`;
-  timerElement.textContent = `Timer: ${selectedTimer} sec`;
+//   timerElement.textContent = `Timer: ${selectedTimer} sec`;
   pointsElement.innerHTML = `Points earned:<span style="color: #2c4c3b;"> ${numSuccs}</span>`;
   mistakesthing.innerHTML = "";
   mistakesthing.appendChild(pointsElement);
@@ -122,7 +116,7 @@ const gameTimer = () => {
   if (selectedTimer > 0) {
     selectedTimer--;
     setTimeout(() => gameTimer(), 1000);
-  } else if (selectedTimer == -1) {
+  } else if (selectedTimer === -1) {
     restartGame();
   } else {
     alert("Time's up! Game Over!");
@@ -164,16 +158,15 @@ const flipCardsWhenStart = (cardElements) => {
   setTimeout(() => {
     cardElements.forEach(({ imgElement, flagCard }) => {
       flipCardBack(imgElement, flagCard);
-      //   revealCard(imgElement, flagCard);
       numSuccs = 0;
       numFail = 0;
     });
   }, 1100);
 };
-
+let isComparing = false;
 //Show the card after being clicked
 const revealCard = (imgElement, flagCard) => {
-  if (flagCard === "hidden" || awaitingEndMove) {
+  if (flagCard === "hidden" || awaitingEndMove || isComparing) {
     return;
   }
 
@@ -181,7 +174,6 @@ const revealCard = (imgElement, flagCard) => {
   imgElement.alt = flagCard.alt;
   flagCard.isVisible = "hidden";
 
-  //   console.log(selectedCards[0]?.flagCard.id && selectedCards[0]?.flagCard.id === flagCard.id );
   if (
     selectedCards[0]?.flagCard.id &&
     selectedCards[0]?.flagCard.id === flagCard.id
@@ -191,55 +183,58 @@ const revealCard = (imgElement, flagCard) => {
 
   selectedCards.push({ imgElement, flagCard });
   if (selectedCards.length === 2) {
+    isComparing = true;
     handleSelectedCards();
   }
-
 };
 // comparing cards to show they are a match
 const handleSelectedCards = () => {
   const [card1, card2] = selectedCards;
 
   selectedCards = [];
-  console.log(`failed times ${numFail} and points are ${numSuccs}`);
-  if (numSuccs == selectedNumOfCards) {
-    setTimeout(() => {
-      alert("YOU HAVE WON!!!!!!!!!!!!!!!!!");
-    }, 1500);
-  }
 
   if (Math.abs(card1.flagCard.id) === Math.abs(card2.flagCard.id)) {
     numSuccs++;
-    console.log("match");
+    console.log("match", numSuccs);
+
     setTimeout(() => {
-        
-        setTimeout(() => {
-          cardContainer.removeChild(card1.imgElement);
-          cardContainer.removeChild(card2.imgElement);
-          console.log(card1.imgElement, card2.imgElement);
-        }, 500);
-        setGameSettings(numFail, numSuccs);
-      }, 1200);
+      setTimeout(() => {
+        cardContainer.removeChild(card1.imgElement);
+        cardContainer.removeChild(card2.imgElement);
+        console.log(card1.imgElement, card2.imgElement);
+        isComparing = false;
+      }, 500);
+
+      setGameSettings(numFail, numSuccs);
+    }, 1200);
+    if (numSuccs == numCardsInput.value) {
+      setTimeout(() => {
+        alert("You won the game");
+        console.log("player has won the game is over");
+        restartGame();
+      }, 2000);
+    }
+    // console.log("player has won the game is over");
   } else {
-    numFail++;
     setTimeout(() => {
+      setTimeout(() => {
+        flipCardBack(card1.imgElement, card1.flagCard);
+        flipCardBack(card2.imgElement, card2.flagCard);
+        setGameSettings(numFail, numSuccs);
+        isComparing = false;
+      }, 500);
+      numFail++;
+      if (numFail == NumMistakesInput.value) {
         setTimeout(() => {
-          flipCardBack(card1.imgElement, card1.flagCard);
-          flipCardBack(card2.imgElement, card2.flagCard);
-          setGameSettings(numFail, numSuccs);
-        }, 500);
-        // numFail++;
-        if (numFail == NumMistakesInput.value) {
-          setTimeout(() => {
-            restartGame();
-          }, 5000);
           alert("you failed ");
-          console.log("reseting in 5 seconds")
-        }
-      }, 1000);
-  
+          restartGame();
+        }, 2000);
+        console.log("player lost the game is over");
+      }
+    }, 1000);
   }
 };
-console.log(NumMistakesInput.value);
+
 // flip cards to black side
 const flipCardBack = (imgElement, flagCard) => {
   imgElement.src = "./Flag/black.png";
@@ -251,17 +246,12 @@ const closePopup = () => {
   document.getElementById("overlay").style.display = "none";
 };
 
-const startGame = () => {
-  console.log("Start the game");
-  document.getElementById("overlay").style.display = "flex";
-};
-
 const restartGame = () => {
   cardContainer.innerHTML = "";
   mistakesthing.innerHTML = "";
   timerthing.innerHTML = "";
-  numSuccs=0;
-  numFail=0;
+  numSuccs = 0;
+  numFail = 0;
   selectedTimer = -1;
   document.querySelector(".btn-1").style.display = "inline";
 };
