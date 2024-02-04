@@ -8,8 +8,13 @@ const NumMistakesInput = document.querySelector(".card-opt2");
 const timerInput = document.querySelector(".card-opt3");
 const mistakesthing = document.querySelector(".scores");
 const timerthing = document.querySelector(".timer-sele");
+// let numAction = document.querySelector(".num-1");
+
+// let selectedNumOfMistakes = parseInt(NumMistakesInput.value);
+
 let numSuccs = document.querySelector(".num-2");
 let numFail = document.querySelector(".num-3");
+// let timer = document.querySelector(".timer");
 let awaitingEndMove = false;
 let activeCard = null;
 let firstCard = 0;
@@ -22,51 +27,51 @@ numSuccs = 0;
 numFail = 0;
 
 const cards = [
-  { id: 1, name: "Jordan", image: "./Flag/Jordan.png", isVisible: "hidden" },
-  { id: -1, name: "Jordan", image: "./Flag/Jordan.png", isVisible: "hidden" },
+  { id: 1, name: "Jordan", image: "./Flag/Jordan.png", isVisible: "visible" },
+  { id: -1, name: "Jordan", image: "./Flag/Jordan.png", isVisible: "visible" },
   {
     id: 2,
     name: "Palestine",
     image: "./Flag/Palestine.png",
-    isVisible: "hidden",
+    isVisible: "visible",
   },
   {
     id: -2,
     name: "Palestine",
     image: "./Flag/Palestine.png",
-    isVisible: "hidden",
+    isVisible: "visible",
   },
   {
     id: 3,
     name: "Saudi",
     image: "./Flag/Saudi_Arabia.png",
-    isVisible: "hidden",
+    isVisible: "visible",
   },
   {
     id: -3,
     name: "Saudi",
     image: "./Flag/Saudi_Arabia.png",
-    isVisible: "hidden",
+    isVisible: "visible",
   },
-  { id: 4, name: "Egypt", image: "./Flag/Egypt.png", isVisible: "hidden" },
-  { id: -4, name: "Egypt", image: "./Flag/Egypt.png", isVisible: "hidden" },
-  { id: 5, name: "Iraq", image: "./Flag/Iraq.png", isVisible: "hidden" },
-  { id: -5, name: "Iraq", image: "./Flag/Iraq.png", isVisible: "hidden" },
-  { id: 6, name: "Lebanon", image: "./Flag/Lebanon.png", isVisible: "hidden" },
+  { id: 4, name: "Egypt", image: "./Flag/Egypt.png", isVisible: "visible" },
+  { id: -4, name: "Egypt", image: "./Flag/Egypt.png", isVisible: "visible" },
+  { id: 5, name: "Iraq", image: "./Flag/Iraq.png", isVisible: "visible" },
+  { id: -5, name: "Iraq", image: "./Flag/Iraq.png", isVisible: "visible" },
+  { id: 6, name: "Lebanon", image: "./Flag/Lebanon.png", isVisible: "visible" },
   {
     id: -6,
     name: "Lebanon",
     image: "./Flag/Lebanon.png",
-    isVisible: "hidden",
+    isVisible: "visible",
   },
-  { id: 7, name: "Qatar", image: "./Flag/Qatar.png", isVisible: "hidden" },
-  { id: -7, name: "Qatar", image: "./Flag/Qatar.png", isVisible: "hidden" },
-  { id: 8, name: "Kuwait", image: "./Flag/Kuwait.png", isVisible: "hidden" },
-  { id: -8, name: "Kuwait", image: "./Flag/Kuwait.png", isVisible: "hidden" },
-  { id: 9, name: "Oman", image: "./Flag/Oman.png", isVisible: "hidden" },
-  { id: -9, name: "Oman", image: "./Flag/Oman.png", isVisible: "hidden" },
-  { id: 10, name: "Yemen", image: "./Flag/Yemen.png", isVisible: "hidden" },
-  { id: -10, name: "Yemen", image: "./Flag/Yemen.png", isVisible: "hidden" },
+  { id: 7, name: "Qatar", image: "./Flag/Qatar.png", isVisible: "visible" },
+  { id: -7, name: "Qatar", image: "./Flag/Qatar.png", isVisible: "visible" },
+  { id: 8, name: "Kuwait", image: "./Flag/Kuwait.png", isVisible: "visible" },
+  { id: -8, name: "Kuwait", image: "./Flag/Kuwait.png", isVisible: "visible" },
+  { id: 9, name: "Oman", image: "./Flag/Oman.png", isVisible: "visible" },
+  { id: -9, name: "Oman", image: "./Flag/Oman.png", isVisible: "visible" },
+  { id: 10, name: "Yemen", image: "./Flag/Yemen.png", isVisible: "visible" },
+  { id: -10, name: "Yemen", image: "./Flag/Yemen.png", isVisible: "visible" },
 ];
 
 let selectedNumOfCards = 0;
@@ -87,6 +92,7 @@ const acceptButtonClickHandler = () => {
   selectedNumOfMistakes = parseInt(NumMistakesInput.value);
   selectedTimer = parseInt(timerInput.value);
 
+  //   console.log(selectedNumOfMistakes, "ekfokefo")
   createCards(selectedNumOfCards);
   document.getElementById("overlay").style.display = "none";
   setGameSettings(numFail, numSuccs);
@@ -94,18 +100,16 @@ const acceptButtonClickHandler = () => {
 };
 initializeGame();
 
-const mistakesDiv = document.createElement("h3");
-const pointsDiv = document.createElement("h3");
+const mistakesElement = document.createElement("h3");
+const pointsElement = document.createElement("h3");
 const timerElement = document.createElement("div");
 
-let scoreRate = 0;
 const setGameSettings = (numFail, numSuccs) => {
-  scoreRate = 100 / numCardsInput.value;
-  gameTimer();
+  gameTimer(selectedTimer);
+
   mistakesDiv.innerHTML = `Mistakes: <span style="color: red;">${numFail}</span> out of ${selectedNumOfMistakes}`;
-  pointsDiv.innerHTML = `Score earned:<span style="color: #2c4c3b;"> ${
-    scoreRate * numSuccs
-  }%</span>`;
+  timerElement.textContent = `Timer: ${selectedTimer} sec`;
+  pointsDiv.innerHTML = `Points earned:<span style="color: #2c4c3b;"> ${numSuccs}</span>`;
   mistakesthing.innerHTML = "";
   mistakesthing.appendChild(pointsDiv);
   mistakesthing.appendChild(mistakesDiv);
@@ -118,7 +122,7 @@ const gameTimer = () => {
   if (selectedTimer > 0) {
     selectedTimer--;
     setTimeout(() => gameTimer(), 1000);
-  } else if (selectedTimer === -1) {
+  } else if (selectedTimer == -1) {
     restartGame();
   } else {
     alert("Time's up! Game Over!");
@@ -160,23 +164,24 @@ const flipCardsWhenStart = (cardElements) => {
   setTimeout(() => {
     cardElements.forEach(({ imgElement, flagCard }) => {
       flipCardBack(imgElement, flagCard);
+      //   revealCard(imgElement, flagCard);
       numSuccs = 0;
       numFail = 0;
     });
   }, 1100);
 };
-let isComparing = false;
 
 //Show the card after being clicked
 const revealCard = (imgElement, flagCard) => {
-  if (flagCard === "visible" || awaitingEndMove || isComparing) {
+  if (flagCard === "hidden" || awaitingEndMove) {
     return;
   }
 
   imgElement.src = flagCard.image;
   imgElement.alt = flagCard.alt;
-  flagCard.isVisible = "visible";
+  flagCard.isVisible = "hidden";
 
+  //   console.log(selectedCards[0]?.flagCard.id && selectedCards[0]?.flagCard.id === flagCard.id );
   if (
     selectedCards[0]?.flagCard.id &&
     selectedCards[0]?.flagCard.id === flagCard.id
@@ -186,7 +191,6 @@ const revealCard = (imgElement, flagCard) => {
 
   selectedCards.push({ imgElement, flagCard });
   if (selectedCards.length === 2) {
-    isComparing = true;
     handleSelectedCards();
   }
 };
@@ -195,64 +199,57 @@ const handleSelectedCards = () => {
   const [card1, card2] = selectedCards;
 
   selectedCards = [];
+  console.log(`failed times ${numFail} and points are ${numSuccs}`);
+  if (numSuccs == selectedNumOfCards) {
+    setTimeout(() => {
+      alert("YOU HAVE WON!!!!!!!!!!!!!!!!!");
+    }, 1500);
+  }
 
   if (Math.abs(card1.flagCard.id) === Math.abs(card2.flagCard.id)) {
     numSuccs++;
-
-    pointsDiv.innerHTML = `Score earned:<span style="color: #2c4c3b;"> ${
-      scoreRate * numSuccs
-    }%</span>`;
-    console.log("match", numSuccs);
-
+    console.log("match");
     setTimeout(() => {
       setTimeout(() => {
         cardContainer.removeChild(card1.imgElement);
         cardContainer.removeChild(card2.imgElement);
         console.log(card1.imgElement, card2.imgElement);
-        isComparing = false;
       }, 500);
-
-      //   setGameSettings(numFail, numSuccs);
+      setGameSettings(numFail, numSuccs);
     }, 1200);
-    if (numSuccs == numCardsInput.value) {
-      setTimeout(() => {
-        alert("You won the game");
-        console.log("player has won the game is over");
-        restartGame();
-      }, 2000);
-    }
-    // console.log("player has won the game is over");
   } else {
     setTimeout(() => {
       setTimeout(() => {
         flipCardBack(card1.imgElement, card1.flagCard);
         flipCardBack(card2.imgElement, card2.flagCard);
-
-        // setGameSettings(numFail, numSuccs);
-        isComparing = false;
+        setGameSettings(numFail, numSuccs);
       }, 500);
       numFail++;
-      mistakesDiv.innerHTML = `Mistakes: <span style="color: red;">${numFail}</span> out of ${selectedNumOfMistakes}`;
       if (numFail == NumMistakesInput.value) {
         setTimeout(() => {
           alert("you failed ");
           restartGame();
-        },1500);
-        console.log("player lost the game is over");
+        }, 3000);
+        console.log("reseting in 3 seconds");
       }
     }, 1000);
   }
 };
-
+console.log(NumMistakesInput.value);
 // flip cards to black side
 const flipCardBack = (imgElement, flagCard) => {
   imgElement.src = "./Flag/black.png";
   imgElement.alt = "Black";
-  flagCard.isVisible = "hidden";
+  flagCard.isVisible = "visible";
 };
 
 const closePopup = () => {
   document.getElementById("overlay").style.display = "none";
+};
+
+const startGame = () => {
+  console.log("Start the game");
+  document.getElementById("overlay").style.display = "flex";
 };
 
 const restartGame = () => {
