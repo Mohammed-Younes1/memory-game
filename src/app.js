@@ -8,6 +8,10 @@ const NumMistakesInput = document.querySelector(".card-opt2");
 const timerInput = document.querySelector(".card-opt3");
 const mistakesthing = document.querySelector(".scores");
 const timerthing = document.querySelector(".timer-sele");
+const signOutBtn = document.querySelector(".sign-out");
+// const usernameShown = document.querySelector(".username-1");
+// const wins = document.querySelector(".wins");
+// const loses = document.querySelector(".loses");
 let numSuccs = document.querySelector(".num-2");
 let numFail = document.querySelector(".num-3");
 let awaitingEndMove = false;
@@ -73,6 +77,17 @@ let selectedNumOfCards = 0;
 let selectedNumOfMistakes = 0;
 let selectedTimer = 0;
 
+
+
+
+// sign out
+const signOut = () => {
+  signOutBtn.addEventListener("click", signOutHandler);
+};
+const signOutHandler = () => {
+  window.location.href = "account.html";
+};
+signOut();
 // initializing the game by clicking play
 const initializeGame = () => {
   playButton.addEventListener("click", () => {
@@ -237,7 +252,7 @@ const handleSelectedCards = () => {
         setTimeout(() => {
           alert("you failed ");
           restartGame();
-        },1500);
+        }, 1500);
         console.log("player lost the game is over");
       }
     }, 1000);
@@ -251,7 +266,7 @@ const flipCardBack = (imgElement, flagCard) => {
   flagCard.isVisible = "hidden";
 };
 // closing the Popup
-const closePopup = () => {
+const closePopups = () => {
   document.getElementById("overlay").style.display = "none";
 };
 //restarting game
@@ -266,4 +281,4 @@ const restartGame = () => {
 };
 
 restartButton.addEventListener("click", restartGame);
-closeButton.addEventListener("click", closePopup);
+closeButton.addEventListener("click", closePopups);

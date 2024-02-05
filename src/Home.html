@@ -11,7 +11,9 @@
       rel="stylesheet"
     />
     <title>Memory Game</title>
+    <script src="./account.js" defer></script>
     <script src="./app.js" defer></script>
+    
   </head>
   <!-- npm run dev -->
   <body>
@@ -73,10 +75,16 @@
 
       <!-- header -->
       <div class="flex justify-around header">
-        <div>
+        <div class="flex">
           <h1 class="py-2 px-4 mx-2 my-4 text-2xl font-semibold">
             Memory Game
           </h1>
+          <h1 id="username-1" class="username-1 py-2 px-4 mx-2 my-4 text-lg font-light"></h1>
+          <div class="self-center text-sm">
+            <h2 class="wins text-green-600"></h2>
+            <h2 class="loses text-red-600"></h2>
+          </div>
+          
         </div>
         <div class="flex ">
           <button
@@ -89,10 +97,16 @@
           >
             Restart
           </button>
+          <button
+          class="sign-out inline bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+        >
+          Sign Out
+        </button>
         </div>
       </div>
       <!-- First Part info -->
       <div class="">
+        
         <h3 class="py-2 px-10 mx-2 my-2 font-bold text-2lx">Objective:</h3>
         <p class="py-2 px-16 mx-2 my-2">
           The goal is simple yet tantalizing – uncover pairs of matching cards

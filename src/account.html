@@ -11,15 +11,40 @@
       rel="stylesheet"
     />
     <title>Account</title>
-    <!-- <script src="./app.js" defer></script> -->
     <script src="./account.js" defer></script>
+    <script src="./app.js" defer></script>
+    
   </head>
   <body class="bg-green-50 font-mono">
     <div class="overlay" id="overlay">
       <div class="popup">
         <div>Enter your Name and Password to Sign In and play</div>
         <form class="block">
-          <div class="my-5"></div>
+          <!-- <div class="my-5"></div> -->
+          <label
+            class="username-lable block mb-2 py-2 text-sm font-medium text-gray-900 dark:text-white"
+            for="username-in"
+            >Username:</label
+          >
+          <input
+            type="text"
+            name="username-in"
+            class="username-in bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder= "Username to sign in"
+            required
+          />
+          <label
+            class="password-label block mb-2 py-2 text-sm font-medium text-gray-900 dark:text-white"
+            for="password-in"
+            >Password:</label
+          >
+          <input
+            type="password-in"
+            name="password-in"
+            class="password-in bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder= "Password"
+            required
+          />
         </form>
         <button
           class="cancelbutton bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
@@ -38,7 +63,31 @@
       <div class="popup">
         <div>Enter your Name and Password to Sign Up</div>
         <form class="block">
-          <div class="my-5"></div>
+          <!-- <div class="my-5"></div> -->
+          <label
+            class="block mb-2 py-2 text-sm font-medium text-gray-900 dark:text-white"
+            for="username-up"
+            >Username:
+          </label>
+          <input
+            type="text"
+            name="username-up"
+            class="username-up bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder= "Username to sign up"
+            required
+          />
+          <label
+            class="block mb-2 py-2 text-sm font-medium text-gray-900 dark:text-white"
+            for="password-up"
+            >Password:
+          </label>
+          <input
+            type="password-up"
+            name="password-up"
+            class="password-up bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder= "Password"
+            required
+          />
         </form>
         <button
           class="cancelbuttons bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
@@ -68,11 +117,11 @@
         >
           Sign Up
         </button>
-        <button
+        <!-- <button
           class="sign-out bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
         >
           Sign Out
-        </button>
+        </button> -->
       </div>
     </div>
     <div class="">
