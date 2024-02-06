@@ -13,6 +13,10 @@ const signOutBtn = document.querySelector(".sign-out");
 // const wins = document.querySelector(".wins");
 // const loses = document.querySelector(".loses");
 // const overlay =document.getElementById('userSettingsModel');
+const wins = document.querySelector(".wins");
+const loses = document.querySelector(".loses");
+let winCounter=0;
+let loseCounter=0;
 let numSuccs = document.querySelector(".num-2");
 let numFail = document.querySelector(".num-3");
 let awaitingEndMove = false;
@@ -77,7 +81,13 @@ const cards = [
 let selectedNumOfCards = 0;
 let selectedNumOfMistakes = 0;
 let selectedTimer = 0;
-
+//updating
+const updateLocalStorage = () => {
+  localStorage.setItem("user-wins", parseInt(winCounter));
+  localStorage.setItem("user-loses", parseInt(loseCounter));
+  console.log(winCounter,"wins");
+  console.log(loseCounter,"loses");
+};
 const signOutHandler = () => {
   document.querySelector(".sign-page").style.display = "inline";
   document.querySelector(".game-page").style.display = "none";
@@ -86,19 +96,37 @@ const signOutHandler = () => {
 };
 signOutBtn.addEventListener("click", signOutHandler);
 
+// localStorage.setItem("user-wins", winCounter);
+// localStorage.setItem("user-loses", loseCounter);
+//show wins/loses
+const showUsernameScore = () => {
+  updateLocalStorage()
+  let userWins = parseInt(localStorage.getItem("user-wins"));
+  let userLoses = parseInt(localStorage.getItem("user-wins"));
+
+  const showWins = document.createElement("h2");
+  const showLoses = document.createElement("h2");
+
+  showWins.innerHTML = `Wins: ${userWins}`;
+  showLoses.innerHTML = `Loses: ${userLoses}`;
+
+  wins.appendChild(showWins);
+  loses.appendChild(showLoses);
+  
+};
+
+showUsernameScore();
+
 // initializing the game by clicking play
-// const initializeGame = () => {
+const initializeGame = () => {
   playButton.addEventListener("click", () => {
     document.getElementById("settingsPlayModel").style.display = "flex";
-    // document.querySelector(".overlay").style.display="inline";
     acceptButton.addEventListener("click", acceptButtonClickHandler);
-    console.log("test");
   });
-// };
+};
 
 //accept button handler to open and select
 const acceptButtonClickHandler = () => {
-  
   selectedNumOfCards = parseInt(numCardsInput.value);
   selectedNumOfMistakes = parseInt(NumMistakesInput.value);
   selectedTimer = parseInt(timerInput.value);
@@ -109,7 +137,7 @@ const acceptButtonClickHandler = () => {
   document.querySelector(".btn-1").style.display = "none";
 };
 
-// initializeGame();
+initializeGame();
 
 const mistakesDiv = document.createElement("h3");
 const pointsDiv = document.createElement("h3");
@@ -207,6 +235,8 @@ const revealCard = (imgElement, flagCard) => {
     handleSelectedCards();
   }
 };
+
+
 // comparing cards to show they are a match
 const handleSelectedCards = () => {
   const [card1, card2] = selectedCards;
@@ -235,6 +265,8 @@ const handleSelectedCards = () => {
       setTimeout(() => {
         alert("You won the game");
         console.log("player has won the game is over");
+        winCounter++;
+        updateLocalStorage();
         restartGame();
       }, 2000);
     }
@@ -253,6 +285,8 @@ const handleSelectedCards = () => {
       if (numFail == NumMistakesInput.value) {
         setTimeout(() => {
           alert("you failed ");
+          loseCounter++;
+          updateLocalStorage();
           restartGame();
         }, 1500);
         console.log("player lost the game is over");
@@ -260,7 +294,6 @@ const handleSelectedCards = () => {
     }, 1000);
   }
 };
-
 
 // flip cards to black side
 const flipCardBack = (imgElement, flagCard) => {
@@ -274,6 +307,8 @@ const closePopups = () => {
 };
 //restarting game
 const restartGame = () => {
+  updateLocalStorage()
+  
   cardContainer.innerHTML = "";
   mistakesthing.innerHTML = "";
   timerthing.innerHTML = "";

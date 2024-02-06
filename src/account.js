@@ -9,10 +9,6 @@ const signinInputPass = document.querySelector(".password-in");
 const signUpInputUser = document.querySelector(".username-up");
 const signUpInputPass = document.querySelector(".password-up");
 const usernameShown = document.getElementById("username-1");
-const wins = document.querySelector(".wins");
-const loses = document.querySelector(".loses");
-let winCounter = 0;
-let loseCounter =0;
 
 // starting the signin Processor
 const initializeSignin = () => {
@@ -23,8 +19,6 @@ const initializeSignin = () => {
 };
 const username = localStorage.getItem("enter-user");
 const password = localStorage.getItem("enter-pass");
-// localStorage.setItem("enter-user", signUpInputUser.value);
-
 
 // taking the signin info
 const signInButtonClickHandler = () => {
@@ -48,9 +42,9 @@ const initializeSignUp = () => {
     signUpButtonToPlay.addEventListener("click", signUpButtonClickHandler);
   });
 };
+
 // taking the signup info
 const signUpButtonClickHandler = () => {
-  //   window.location.href = "Home.html";
   localStorage.setItem("enter-user", signUpInputUser.value);
   localStorage.setItem("enter-pass", signUpInputPass.value);
   document.getElementById("overlay-up").style.display = "none";
@@ -60,17 +54,9 @@ initializeSignUp();
 
 //Username and wins/loses
 const showUsername = () => {
-  
   const usernameDisplay = document.createElement("h1");
-  const showWins = document.createElement("h2");
-  const showLoses = document.createElement("h2");
-  // debugger;
   usernameShown.innerHTML = `Username: ${username}`;
-  showWins.innerHTML = `Wins: `;
-  showLoses.innerHTML = `Loses: `;
   usernameShown.appendChild(usernameDisplay);
-  wins.appendChild(showWins);
-  loses.appendChild(showLoses);
 };
 
 const closePopup = () => {
@@ -80,4 +66,3 @@ const closePopup = () => {
 };
 cancelButton.addEventListener("click", closePopup);
 cancelButtons.addEventListener("click", closePopup);
-
