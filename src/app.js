@@ -12,6 +12,7 @@ const signOutBtn = document.querySelector(".sign-out");
 // const usernameShown = document.querySelector(".username-1");
 // const wins = document.querySelector(".wins");
 // const loses = document.querySelector(".loses");
+// const overlay =document.getElementById('userSettingsModel');
 let numSuccs = document.querySelector(".num-2");
 let numFail = document.querySelector(".num-3");
 let awaitingEndMove = false;
@@ -77,37 +78,38 @@ let selectedNumOfCards = 0;
 let selectedNumOfMistakes = 0;
 let selectedTimer = 0;
 
-
-
-
-// sign out
-const signOut = () => {
-  signOutBtn.addEventListener("click", signOutHandler);
-};
 const signOutHandler = () => {
-  window.location.href = "account.html";
+  document.querySelector(".sign-page").style.display = "inline";
+  document.querySelector(".game-page").style.display = "none";
+  document.getElementById("userSettingsModel").style.display = "none";
+  window.location.reload();
 };
-signOut();
+signOutBtn.addEventListener("click", signOutHandler);
+
 // initializing the game by clicking play
-const initializeGame = () => {
+// const initializeGame = () => {
   playButton.addEventListener("click", () => {
-    document.getElementById("overlay").style.display = "flex";
+    document.getElementById("settingsPlayModel").style.display = "flex";
+    // document.querySelector(".overlay").style.display="inline";
     acceptButton.addEventListener("click", acceptButtonClickHandler);
+    console.log("test");
   });
-};
+// };
 
 //accept button handler to open and select
 const acceptButtonClickHandler = () => {
+  
   selectedNumOfCards = parseInt(numCardsInput.value);
   selectedNumOfMistakes = parseInt(NumMistakesInput.value);
   selectedTimer = parseInt(timerInput.value);
 
   createCards(selectedNumOfCards);
-  document.getElementById("overlay").style.display = "none";
+  document.getElementById("settingsPlayModel").style.display = "none";
   setGameSettings(numFail, numSuccs);
   document.querySelector(".btn-1").style.display = "none";
 };
-initializeGame();
+
+// initializeGame();
 
 const mistakesDiv = document.createElement("h3");
 const pointsDiv = document.createElement("h3");
@@ -259,6 +261,7 @@ const handleSelectedCards = () => {
   }
 };
 
+
 // flip cards to black side
 const flipCardBack = (imgElement, flagCard) => {
   imgElement.src = "./Flag/black.png";
@@ -267,7 +270,7 @@ const flipCardBack = (imgElement, flagCard) => {
 };
 // closing the Popup
 const closePopups = () => {
-  document.getElementById("overlay").style.display = "none";
+  document.getElementById("settingsPlayModel").style.display = "none";
 };
 //restarting game
 const restartGame = () => {

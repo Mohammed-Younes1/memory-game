@@ -8,27 +8,33 @@ const signInInputUser = document.querySelector(".username-in");
 const signinInputPass = document.querySelector(".password-in");
 const signUpInputUser = document.querySelector(".username-up");
 const signUpInputPass = document.querySelector(".password-up");
-const usernameShown = document.querySelector(".username-1");
+const usernameShown = document.getElementById("username-1");
 const wins = document.querySelector(".wins");
 const loses = document.querySelector(".loses");
+let winCounter = 0;
+let loseCounter =0;
 
 // starting the signin Processor
 const initializeSignin = () => {
   signInBtn.addEventListener("click", () => {
-    document.getElementById("overlay").style.display = "flex";
+    document.getElementById("userSettingsModel").style.display = "flex";
     signInButtonToPlay.addEventListener("click", signInButtonClickHandler);
   });
 };
+const username = localStorage.getItem("enter-user");
+const password = localStorage.getItem("enter-pass");
+// localStorage.setItem("enter-user", signUpInputUser.value);
+
 
 // taking the signin info
 const signInButtonClickHandler = () => {
   // showUsername();
-  const username = localStorage.getItem("enter-user");
-  const password = localStorage.getItem("enter-pass");
+
   console.log(signInInputUser.value, signinInputPass.value);
   if (username == signInInputUser.value && password == signinInputPass.value) {
-    // showUsername();
-    window.location.href = "Home.html";
+    showUsername();
+    document.querySelector(".sign-page").style.display = "none";
+    document.querySelector(".game-page").style.display = "inline";
   } else {
     alert("Make sure the username or password is correct");
   }
@@ -53,21 +59,23 @@ const signUpButtonClickHandler = () => {
 initializeSignUp();
 
 //Username and wins/loses
-// const showUsername = () => {
-//   const usernameDisplay = document.createElement("h1");
-//   const showWins = document.createElement("h2");
-//   const showLoses = document.createElement("h2");
-//   // debugger;
-//   usernameDisplay.innerHTML = `Username: mohammed`;
-//   showWins.innerHTML = `Wins: 20`;
-//   showLoses.innerHTML = `Loses: 20`;
-//   usernameShown.appendChild(usernameDisplay);
-//   wins.appendChild(showWins);
-//   loses.appendChild(showLoses);
-// };
+const showUsername = () => {
+  
+  const usernameDisplay = document.createElement("h1");
+  const showWins = document.createElement("h2");
+  const showLoses = document.createElement("h2");
+  // debugger;
+  usernameShown.innerHTML = `Username: ${username}`;
+  showWins.innerHTML = `Wins: `;
+  showLoses.innerHTML = `Loses: `;
+  usernameShown.appendChild(usernameDisplay);
+  wins.appendChild(showWins);
+  loses.appendChild(showLoses);
+};
 
 const closePopup = () => {
-  document.getElementById("overlay").style.display = "none";
+  document.getElementById("userSettingsModel").style.display = "none";
+  document.getElementById("settingsPlayModel").style.display = "none";
   document.getElementById("overlay-up").style.display = "none";
 };
 cancelButton.addEventListener("click", closePopup);

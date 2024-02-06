@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="output.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Memory Game</title>
+   
+    
+  </head>
+  <!-- npm run dev -->
+  <body>
+    <div class="bg-green-50 font-mono">
+            <div>
+              <div class="overlay" id="overlay">
+                <div class="popup">
+                  <div>to start the game please choose!</div>
+                  <form class="block">
+                    <div class="my-5">
+                      <div class="my-5">
+                        <label for="cards">How many cards</label>
+                        <select
+                          id="card-opt1"
+                          name="cards"
+                          class="form-select card-opt1"
+                        >
+                          <option value="4">8</option>
+                          <option value="6">12</option>
+                          <option value="8">16</option>
+                          <option value="10">20</option>
+                          <!-- <option value="twelve-card">12</option> -->
+                        </select>
+                      </div>
+      
+                      <div class="my-5">
+                        <label for="mistakes">How many failed attempts? </label>
+                        <select
+                          id="card-opt2"
+                          name="mistakes"
+                          class="form-select card-opt2"
+                        >
+                          <option value="1">1 mistake</option>
+                          <option value="2">2 mistakes</option>
+                          <option value="3">3 mistakes</option>
+                          <option value="4">4 mistakes</option>
+                          <option value="5">5 mistakes</option>
+                        </select>
+                      </div>
+      
+                      <div class="my-5">
+                        <label for="timer">Choose the time!</label>
+                        <select
+                          id="card-opt3"
+                          name="timer"
+                          class="form-select card-opt3"
+                        >
+                          <option value="30">30 sec</option>
+                          <option value="40">40 sec</option>
+                          <option value="60">1 min</option>
+                          <option value="120">2 mins</option>
+                          <option value="180">3 mins</option>
+                        </select>
+                      </div>
+                    </div>
+                  </form>
+                  <button
+                    class="closebutton bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+                  >
+                    Close
+                  </button>
+                  <button
+                    class="acceptbutton bg-green-400 justify-end hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+                  >
+                    Accept
+                  </button>
+                </div>
+              </div>
+      
+              <!-- header -->
+              <div class="flex justify-around header">
+                <div class="flex">
+                  <h1 class="py-2 px-4 mx-2 my-4 text-2xl font-semibold">
+                    Memory Game
+                  </h1>
+                  <h1
+                    id="username-1"
+                    class="username-1 py-2 px-4 mx-2 my-4 text-lg font-light"
+                  ></h1>
+                  <div class="self-center text-sm">
+                    <h2 class="wins text-green-600"></h2>
+                    <h2 class="loses text-red-600"></h2>
+                  </div>
+                </div>
+                <div class="flex">
+                  <button
+                    class="btn-1 inline bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+                  >
+                    Play
+                  </button>
+                  <button
+                    class="btn-2 bg-blue-400 hover:bg-blue-800 text-white hover:text-red-600 font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+                  >
+                    Restart
+                  </button>
+                  <button
+                    class="sign-out inline bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-4 border border-black rounded mx-2 my-4 w-32"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              </div>
+              <!-- First Part info -->
+              <div class="">
+                <h3 class="py-2 px-10 mx-2 my-2 font-bold text-2lx">Objective:</h3>
+                <p class="py-2 px-16 mx-2 my-2">
+                  The goal is simple yet tantalizing – uncover pairs of matching cards
+                  scattered across the game board. The catch? The cards are initially
+                  face-down, and it's up to you to remember their positions as you
+                  flip them over two at a time.
+                </p>
+              </div>
+              <!-- Second Part scores-->
+              <div
+                class="flex justify-between font-semibold border-4 border-blue-300 bg-green-100 my-8 mx-10 px-4 py-5 drop-shadow-2xl"
+              >
+                <div
+                  class="scores 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs"
+                >
+                  <!-- <h3 class="num-1 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs">Number of actions:</h3> -->
+                  <h3
+                    class="num-2 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs"
+                  ></h3>
+                  <h3
+                    class="num-3 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs"
+                  ></h3>
+                  <!-- it was Successful points: and Failed points: -->
+                </div>
+                <div
+                  class="timer-sele 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs"
+                >
+                  <div
+                    class="timer 2xl:text-lg xl:text-lg lg:text-lg lgish:text-sm md:text-sm sm:text-sm xsm:text-xs xxsm:text-xs"
+                  ></div>
+                </div>
+              </div>
+      
+              <!-- third Part main-->
+              <div
+                class="px-10 mx-10 border-4 h-[700px] border-blue-300 drop-shadow-2xl"
+              >
+                <!--             <div class="photos-place grid grid-cols-2 2xl:grid-cols-6 gap-4 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3" id="photos-place"></div> -->
+                <div
+                  class="photos-place grid grid-cols-2 2xl:grid-cols-6 gap-4 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-4 xsm:grid-cols-4"
+                  id="photos-place"
+                ></div>
+                <!-- </div> -->
+              </div>
+            </div>
+          </div>
+    <script src="./account.js" ></script>
+    <script src="./app.js" ></script>
+  </body>
+</html>

@@ -14,6 +14,30 @@ body {
     z-index: 1;
     justify-content: center;
   }
+  .settingsPlayModel{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    z-index: 1;
+    justify-content: center;
+  }
+  .userSettingsModel{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    z-index: 1;
+    justify-content: center;
+  }
   .overlay-up{
     display: none;
     position: fixed;
@@ -27,6 +51,13 @@ body {
     justify-content: center;
   }
   .sign-out{
+    display: none;
+  }
+  
+  .sign-page{
+   display: inline;
+  }
+  .game-page{
     display: none;
   }
   
