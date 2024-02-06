@@ -9,14 +9,12 @@ const timerInput = document.querySelector(".card-opt3");
 const mistakesthing = document.querySelector(".scores");
 const timerthing = document.querySelector(".timer-sele");
 const signOutBtn = document.querySelector(".sign-out");
-// const usernameShown = document.querySelector(".username-1");
-// const wins = document.querySelector(".wins");
-// const loses = document.querySelector(".loses");
-// const overlay =document.getElementById('userSettingsModel');
 const wins = document.querySelector(".wins");
 const loses = document.querySelector(".loses");
-let winCounter=0;
-let loseCounter=0;
+let winCounter = localStorage.getItem("user-wins") || 0;
+let loseCounter = localStorage.getItem("user-loses") || 0;
+// winCounter = winCounter || 0;
+// loseCounter = loseCounter || 0;
 let numSuccs = document.querySelector(".num-2");
 let numFail = document.querySelector(".num-3");
 let awaitingEndMove = false;
@@ -81,13 +79,8 @@ const cards = [
 let selectedNumOfCards = 0;
 let selectedNumOfMistakes = 0;
 let selectedTimer = 0;
-//updating
-const updateLocalStorage = () => {
-  localStorage.setItem("user-wins", parseInt(winCounter));
-  localStorage.setItem("user-loses", parseInt(loseCounter));
-  console.log(winCounter,"wins");
-  console.log(loseCounter,"loses");
-};
+
+//handles signout and reloads the page
 const signOutHandler = () => {
   document.querySelector(".sign-page").style.display = "inline";
   document.querySelector(".game-page").style.display = "none";
@@ -96,11 +89,9 @@ const signOutHandler = () => {
 };
 signOutBtn.addEventListener("click", signOutHandler);
 
-// localStorage.setItem("user-wins", winCounter);
-// localStorage.setItem("user-loses", loseCounter);
 //show wins/loses
 const showUsernameScore = () => {
-  updateLocalStorage();
+  // updateLocalStorage();
   let userWins = parseInt(localStorage.getItem("user-wins"));
   let userLoses = parseInt(localStorage.getItem("user-loses"));
 
@@ -108,19 +99,20 @@ const showUsernameScore = () => {
   const showLoses = document.createElement("h2");
 
   showWins.innerHTML = `Wins: ${userWins}`;
-  
+
   showLoses.innerHTML = `Loses: ${userLoses}`;
   wins.innerHTML = "";
   wins.appendChild(showWins);
-  loses.innerHTML="";
+  loses.innerHTML = "";
   loses.appendChild(showLoses);
 };
 
-
+showUsernameScore();
 // initializing the game by clicking play
 const initializeGame = () => {
   playButton.addEventListener("click", () => {
     document.getElementById("settingsPlayModel").style.display = "flex";
+
     acceptButton.addEventListener("click", acceptButtonClickHandler);
   });
 };
@@ -134,7 +126,7 @@ const acceptButtonClickHandler = () => {
   createCards(selectedNumOfCards);
   document.getElementById("settingsPlayModel").style.display = "none";
   setGameSettings(numFail, numSuccs);
-  showUsernameScore();
+
   document.querySelector(".btn-1").style.display = "none";
 };
 
@@ -168,6 +160,9 @@ const gameTimer = () => {
     restartGame();
   } else {
     alert("Time's up! Game Over!");
+    loseCounter++;
+    localStorage.setItem("user-loses", loseCounter);
+    // updateLocalStorage();
     restartGame();
   }
 };
@@ -237,7 +232,6 @@ const revealCard = (imgElement, flagCard) => {
   }
 };
 
-
 // comparing cards to show they are a match
 const handleSelectedCards = () => {
   const [card1, card2] = selectedCards;
@@ -266,7 +260,8 @@ const handleSelectedCards = () => {
         alert("You won the game");
         console.log("player has won the game is over");
         winCounter++;
-        updateLocalStorage();
+        // updateLocalStorage();
+        localStorage.setItem("user-wins", winCounter);
         restartGame();
       }, 2000);
     }
@@ -286,7 +281,8 @@ const handleSelectedCards = () => {
         setTimeout(() => {
           alert("you failed ");
           loseCounter++;
-          updateLocalStorage();
+          // updateLocalStorage();
+          localStorage.setItem("user-loses", loseCounter);
           restartGame();
         }, 1500);
         console.log("player lost the game is over");
@@ -307,8 +303,9 @@ const closePopups = () => {
 };
 //restarting game
 const restartGame = () => {
-  updateLocalStorage()
-  showUsernameScore()
+  localStorage.setItem("user-wins", winCounter);
+  localStorage.setItem("user-loses", loseCounter);
+  showUsernameScore();
   cardContainer.innerHTML = "";
   mistakesthing.innerHTML = "";
   timerthing.innerHTML = "";
@@ -320,3 +317,5 @@ const restartGame = () => {
 
 restartButton.addEventListener("click", restartGame);
 closeButton.addEventListener("click", closePopups);
+
+window.addEventListener("load", showUsernameScore);

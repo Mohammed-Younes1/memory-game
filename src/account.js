@@ -9,6 +9,8 @@ const signinInputPass = document.querySelector(".password-in");
 const signUpInputUser = document.querySelector(".username-up");
 const signUpInputPass = document.querySelector(".password-up");
 const usernameShown = document.getElementById("username-1");
+// let winCounters = localStorage.getItem("user-wins") || 0;
+// let loseCounters = localStorage.getItem("user-loses") || 0;
 
 // starting the signin Processor
 const initializeSignin = () => {
@@ -47,8 +49,12 @@ const initializeSignUp = () => {
 const signUpButtonClickHandler = () => {
   localStorage.setItem("enter-user", signUpInputUser.value);
   localStorage.setItem("enter-pass", signUpInputPass.value);
+  localStorage.setItem("user-wins", 0);
+  localStorage.setItem("user-loses", 0);
+  console.log(winCounter)
   document.getElementById("overlay-up").style.display = "none";
   console.log(localStorage.setItem("enter-user", signUpInputUser.value));
+  window.location.reload();
 };
 initializeSignUp();
 
