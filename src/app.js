@@ -100,22 +100,22 @@ signOutBtn.addEventListener("click", signOutHandler);
 // localStorage.setItem("user-loses", loseCounter);
 //show wins/loses
 const showUsernameScore = () => {
-  updateLocalStorage()
+  updateLocalStorage();
   let userWins = parseInt(localStorage.getItem("user-wins"));
-  let userLoses = parseInt(localStorage.getItem("user-wins"));
+  let userLoses = parseInt(localStorage.getItem("user-loses"));
 
   const showWins = document.createElement("h2");
   const showLoses = document.createElement("h2");
 
   showWins.innerHTML = `Wins: ${userWins}`;
-  showLoses.innerHTML = `Loses: ${userLoses}`;
-
-  wins.appendChild(showWins);
-  loses.appendChild(showLoses);
   
+  showLoses.innerHTML = `Loses: ${userLoses}`;
+  wins.innerHTML = "";
+  wins.appendChild(showWins);
+  loses.innerHTML="";
+  loses.appendChild(showLoses);
 };
 
-showUsernameScore();
 
 // initializing the game by clicking play
 const initializeGame = () => {
@@ -134,6 +134,7 @@ const acceptButtonClickHandler = () => {
   createCards(selectedNumOfCards);
   document.getElementById("settingsPlayModel").style.display = "none";
   setGameSettings(numFail, numSuccs);
+  showUsernameScore();
   document.querySelector(".btn-1").style.display = "none";
 };
 
@@ -242,7 +243,6 @@ const handleSelectedCards = () => {
   const [card1, card2] = selectedCards;
 
   selectedCards = [];
-
   if (Math.abs(card1.flagCard.id) === Math.abs(card2.flagCard.id)) {
     numSuccs++;
 
@@ -308,7 +308,7 @@ const closePopups = () => {
 //restarting game
 const restartGame = () => {
   updateLocalStorage()
-  
+  showUsernameScore()
   cardContainer.innerHTML = "";
   mistakesthing.innerHTML = "";
   timerthing.innerHTML = "";
